@@ -1,11 +1,5 @@
 import java.util.*;
 
-public class Main {
-    public static void main(String[] args) {
-
-    }
-}
-
 class Level1 {
         public static int squirrel(int N) {
         int fact = N;
