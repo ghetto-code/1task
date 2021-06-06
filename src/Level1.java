@@ -1,3 +1,4 @@
+import java.util.*;
 
 public class Level1 {
     public static int [] SynchronizingTables(int N, int [] ids, int [] salary) {
