@@ -1,16 +1,31 @@
-import java.util.*;
-class Level1 {
-    public static int squirrel(int N) {
-        if (N <= 1) {
-            return 1;
-        }
-        int fact = 1;
-        for (int i = 2; i < N + 1; i++) {
-            fact *= i;
+public class Level1 {
+    public static int [] MadMax(int N, int [] Tele) {
+        int[] z = new int[Tele.length];
+        for (int i = 0; i < Tele.length; i ++) {
+            for(int j = 0; j < Tele.length - 1; j ++){
+                if (Tele[j] > Tele[j + 1]){
+                    int x = Tele[j];
+                    Tele[j] = Tele[j + 1];
+                    Tele[j + 1] = x;
+                }
+            }
 
         }
-        char quant = Integer.toString(fact).charAt(0);
+        for (int i = N/2+1; i < Tele.length; i ++) {
+            for(int j = N/2+1; j < Tele.length - 1; j ++){
+                if (Tele[j] < Tele[j + 1]){
+                    int x = Tele[j];
+                    Tele[j] = Tele[j + 1];
+                    Tele[j + 1] = x;
+                }
+            }
+        }
+        int v = Tele[Tele.length/2];
+        Tele[Tele.length/2] = Tele[Tele.length/2 + 1];
+        Tele[Tele.length/2 + 1] = Tele[Tele.length - 1];
+        Tele[Tele.length - 1] = v;
 
-        return Integer.parseInt(String.valueOf(quant));
+        return Tele;
     }
+
 }

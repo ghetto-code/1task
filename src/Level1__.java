@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Level1 {
+public class Level1__ {
     public static int ConquestCampaign(int N, int M, int L, int[] battalion) {
         int days = 1;
         HashMap<Integer, String> collection = new HashMap<>();
