@@ -12,7 +12,7 @@ public class Level1 {
 
         }
         for (int i = N/2+1; i < Tele.length; i ++) {
-            for(int j = N/2+1; j < Tele.length - 1; j ++){
+            for(int j = N/2; j < Tele.length - 1; j ++){
                 if (Tele[j] < Tele[j + 1]){
                     int x = Tele[j];
                     Tele[j] = Tele[j + 1];
@@ -20,10 +20,6 @@ public class Level1 {
                 }
             }
         }
-        int v = Tele[Tele.length/2];
-        Tele[Tele.length/2] = Tele[Tele.length/2 + 1];
-        Tele[Tele.length/2 + 1] = Tele[Tele.length - 1];
-        Tele[Tele.length - 1] = v;
 
         return Tele;
     }
