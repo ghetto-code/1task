@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-import java.util.Arrays;
 
 public class Level1 {
     public static int [] SynchronizingTables(int N, int [] ids, int [] salary) {
