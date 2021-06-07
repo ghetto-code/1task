@@ -1,14 +1,6 @@
-import java.util.Arrays;
-
 public class Main {
     public static void main(String[] args) {
-        int[] ids = new int[]{98,23,61,49,1,79,9};
-        int[] payments = new int[]{1,15,32,47,68,39,24};
-        int m = ids.length + payments.length;
-        int[] xyu = Level1.SynchronizingTables(m,ids,payments);
-            for (int x: xyu) {
-                System.out.println(x);
-            }
+        System.out.println(Level1.PatternUnlock(11,new int[]{9,8,7,2,6,5,2,3,4,1,2}));
     }
 }
 
