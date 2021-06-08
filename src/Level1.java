@@ -8,7 +8,6 @@ public class Level1 {
         int leg = 1;
         double hypotenuse = Math.hypot(leg,leg);
         BigDecimal hypo = new BigDecimal(hypotenuse);
-        hypo = hypo.setScale(5, RoundingMode.HALF_UP);
         double x = hypo.doubleValue();
 
         String str = "";
