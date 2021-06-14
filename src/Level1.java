@@ -4,14 +4,14 @@ import java.util.Arrays;
 public class Level1 {
     public static int [] WordSearch(int len, String s, String subs){
 
-        // коллекция строк
+
         ArrayList<String> linesCollection = new ArrayList<>();
         ArrayList<Integer> resultCollection = new ArrayList<>();
         strTreatment(len, s, linesCollection);
 
 
         for (String line : linesCollection){
-            // проверить строки в коллекции на наличие искомой подстроки
+
             if (!line.contains(subs)){
                 resultCollection.add(0);
             } else {
@@ -31,20 +31,19 @@ public class Level1 {
             }
         }
 
-        // результирующий массив
+
         int [] resultArray = new int[resultCollection.size()];
         for (int i = 0; i < resultArray.length; i ++) {
             resultArray[i] = resultCollection.get(i);
         }
 
-        // возвращаем результирующий массив
+
         return resultArray;
     }
 
-    // задаем метод обработки строки, который принимает в качестве парамметров длину разбивки, строку для обработки
-    // и коллекцию, в которую будут добавляться строки после выравнивания.
+
     public static String strTreatment(int len, String str, ArrayList<String> lines) {
-        // точка выхода рекурсии
+
         if (str.length() <= len) {
             lines.add(str);
             return str;
