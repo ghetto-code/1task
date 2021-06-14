@@ -2,11 +2,7 @@ import java.util.*;
 
 public class Level1 {
     public static int [] WordSearch(int len, String s, String subs) {
-        try {
-            s.charAt(len);
-        } catch (StringIndexOutOfBoundsException e) {
-            System.out.println(e);
-        }
+
         ArrayList<String> linesCollection = new ArrayList<>();
         ArrayList<Integer> resultCollection = new ArrayList<>();
         strTreatment(len, s, linesCollection);
@@ -28,30 +24,20 @@ public class Level1 {
                 } else {
                     resultCollection.add(1);
                 }
-
             }
         }
-
 
         int [] resultArray = new int[resultCollection.size()];
         for (int i = 0; i < resultArray.length; i ++) {
             resultArray[i] = resultCollection.get(i);
         }
-
-
         return resultArray;
     }
 
 
     public static String strTreatment(int len, String str, ArrayList<String> lines) {
-
-
-        try {
-            if (str.length() <= len) {
-                lines.add(str);
-                return str;
-            }
-        } catch (Exception e) {
+        if (str.length() <= len) {
+            lines.add(str);
             return str;
         }
 
@@ -73,24 +59,26 @@ public class Level1 {
                 lines.add(newLine);
                 return strTreatment(len, newString, lines);
             }
-
             if (i == 1) {
                 for (int j = idx; j < str.length(); j ++) {
-                    if (str.charAt(j) == ' '|| j == str.length()-1) {
+                    if (str.charAt(j) == ' '|| j == str.length() - 1) {
                         idx = j;
-
+                        int from = 0;
                         String newStr = str.substring(0,idx).trim();
-                        for (int z = 0; z < newStr.length(); z += len) {
-                            lines.add(str.substring(z,z+len).trim());
+                        for (int z = 0; z + len < newStr.length(); z += len) {
+                            lines.add(newStr.substring(z, z + len).trim());
+                            from = z + len;
                         }
-                        newString = str.substring(idx).trim();
+                        newStr = str.substring(from, idx + 1);
+                        lines.add(newStr.trim());
+
+                        newString = str.substring(idx+1).trim();
                         return strTreatment(len, newString, lines);
+
                     }
                 }
             }
         }
-
         return strTreatment(len, str, lines);
     }
 }
-
