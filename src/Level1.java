@@ -1,80 +1,90 @@
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 
 public class Level1 {
-    public static String PatternUnlock(int N, int [] hits) {
-        int leg = 1;
-        double hypotenuse = Math.hypot(leg,leg);
-        BigDecimal hypo = new BigDecimal(hypotenuse);
-        double x = hypo.doubleValue();
+    public static int [] WordSearch(int len, String s, String subs){
 
-        String str = "";
-        HashMap<String,String> newList = new HashMap<>();
-        newList.put("15","51");
-        newList.put("18","81");
-        newList.put("24","42");
-        newList.put("27","72");
-        newList.put("53","35");
-        newList.put("38","83");
-        newList.put("62","26");
-        newList.put("29","92");
-        int [] hitExpand = new int[N * 2];
-        for (int i = 0; i < hitExpand.length - 1; i += 2) {
-            hitExpand[i] = hits[i / 2];
-            hitExpand[i + 1] = hits[i / 2];
+        // коллекция строк
+        ArrayList<String> linesCollection = new ArrayList<>();
+        ArrayList<Integer> resultCollection = new ArrayList<>();
+        strTreatment(len, s, linesCollection);
 
-        }
 
-        ArrayList<Double> resList = new ArrayList<>();
-        for (int i = 1; i < hitExpand.length - 2; i += 2) {
+        for (String line : linesCollection){
+            // проверить строки в коллекции на наличие искомой подстроки
+            if (!line.contains(subs)){
+                resultCollection.add(0);
+            } else {
+                String[] arr = line.split(" ");
+                boolean flag = false;
+                for(String x : arr){
+                    if (x.equals(subs)) {
+                        flag = true;
+                    }
+                }
+                if(!flag){
+                    resultCollection.add(0);
+                } else {
+                    resultCollection.add(1);
+                }
 
-            if (isDiagonal(hitExpand[i],hitExpand[i+1],newList)) {
-               resList.add(x);
-               continue;
             }
-            resList.add(1.0);
         }
 
-
-        double rez = 0;
-        for (Double d: resList) {
-            rez += d;
+        // результирующий массив
+        int [] resultArray = new int[resultCollection.size()];
+        for (int i = 0; i < resultArray.length; i ++) {
+            resultArray[i] = resultCollection.get(i);
         }
 
-        BigDecimal lastRez = new BigDecimal(rez);
-        lastRez= lastRez.setScale(5, RoundingMode.HALF_UP);
-
-        String lastStr = lastRez.toString();
-
-        String[] convert = lastStr.split("\\.");
-        lastStr = String.join("",convert);
-        convert = lastStr.split("0");
-        lastStr = String.join("",convert);
-
-        str = lastStr;
-
-
-        return str;
+        // возвращаем результирующий массив
+        return resultArray;
     }
 
-    public static boolean isDiagonal(int a,int b, HashMap<String,String> list) {
-        boolean isDiag = false;
-
-        String firstStr = Integer.toString(a) + Integer.toString(b);
-        String secondStr = Integer.toString(b) + Integer.toString(a);
-
-        if (list.containsKey(firstStr)
-                || list.containsValue(firstStr)
-                || list.containsKey(secondStr)
-                || list.containsValue(secondStr)) {
-
-            isDiag = true;
-            return isDiag;
-
+    // задаем метод обработки строки, который принимает в качестве парамметров длину разбивки, строку для обработки
+    // и коллекцию, в которую будут добавляться строки после выравнивания.
+    public static String strTreatment(int len, String str, ArrayList<String> lines) {
+        // точка выхода рекурсии
+        if (str.length() <= len) {
+            lines.add(str);
+            return str;
+        }
+        int idx = len;
+        String newLine;
+        String newString;
+        if (str.charAt(len) == ' ') {
+            newLine = str.substring(0,idx).trim();
+            newString = str.substring(idx).trim();
+            lines.add(newLine);
+            return strTreatment(len, newString, lines);
         }
 
-        return isDiag;
+        for (int i = idx; i > 0; i --) {
+            if (str.charAt(i) == ' ') {
+                idx = i;
+                newLine = str.substring(0,idx).trim();
+                newString = str.substring(idx).trim();
+                lines.add(newLine);
+                return strTreatment(len, newString, lines);
+            }
+
+            if (i == 1) {
+                for (int j = idx; j < str.length(); j ++) {
+                    if (str.charAt(j) == ' '|| j == str.length()-1) {
+                        idx = j;
+
+                        String newStr = str.substring(0,idx).trim();
+                        for (int z = 0; z < newStr.length(); z += len) {
+                            lines.add(str.substring(z,z+len).trim());
+                        }
+                        newString = str.substring(idx).trim();
+                        return strTreatment(len, newString, lines);
+                    }
+                }
+            }
+        }
+
+        return strTreatment(len, str, lines);
     }
 }
+

@@ -1,6 +1,14 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println(Level1.PatternUnlock(10,new int[]{1,2,3,4,5,6,2,7,8,9}));
+        String str = "1) строка разбивается на набор строк через выравнивание по заданной ширине.";
+
+        String substr = "строк";
+
+        int[] z = Level1.WordSearch(12, str, substr);
+
+        for(int x : z){
+            System.out.println(x);
+        }
     }
 }
 
