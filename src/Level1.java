@@ -1,17 +1,12 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class Level1 {
-    public static int [] WordSearch(int len, String s, String subs){
-
-
+    public static int [] WordSearch(int len, String s, String subs) {
         ArrayList<String> linesCollection = new ArrayList<>();
         ArrayList<Integer> resultCollection = new ArrayList<>();
         strTreatment(len, s, linesCollection);
 
-
         for (String line : linesCollection){
-
             if (!line.contains(subs)){
                 resultCollection.add(0);
             } else {
@@ -20,6 +15,7 @@ public class Level1 {
                 for(String x : arr){
                     if (x.equals(subs)) {
                         flag = true;
+                        break;
                     }
                 }
                 if(!flag){
