@@ -2,6 +2,11 @@ import java.util.*;
 
 public class Level1 {
     public static int [] WordSearch(int len, String s, String subs) {
+        try {
+            s.charAt(len);
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println(e);
+        }
         ArrayList<String> linesCollection = new ArrayList<>();
         ArrayList<Integer> resultCollection = new ArrayList<>();
         strTreatment(len, s, linesCollection);
@@ -40,10 +45,16 @@ public class Level1 {
 
     public static String strTreatment(int len, String str, ArrayList<String> lines) {
 
-        if (str.length() <= len) {
-            lines.add(str);
+
+        try {
+            if (str.length() <= len) {
+                lines.add(str);
+                return str;
+            }
+        } catch (Exception e) {
             return str;
         }
+
         int idx = len;
         String newLine;
         String newString;
