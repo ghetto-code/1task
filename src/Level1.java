@@ -87,6 +87,3 @@ public class Level1 {
         return strTreatment(len, str, lines);
     }
 }
-
-//        newString = str.substring(len).trim();
-//        return strTreatment(len, newString, lines);
