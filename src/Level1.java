@@ -87,32 +87,6 @@ public class Level1 {
         return strTreatment(len, str, lines);
     }
 }
-////////////////////////////////////
-//        idx = j;
-//        int from = 0;
-//        String newStr = str.substring(0,idx).trim();
-//        for (int z = 0; z + len < newStr.length(); z += len) {
-//          lines.add(newStr.substring(z, z + len).trim());
-//        from = z + len;
-//        }
-//        if (from > 0) {
-//          newStr = str.substring(from, idx + 1);
-//          lines.add(newStr.trim());
-//          newString = str.substring(idx).trim();
-//        if (newStr.length() == 0) {
-//          return str;
-//        }
-//        return strTreatment(len, newString, lines);
-//        }
 
-
-////////////////////////////////////
-//        idx = j;
-//
-//        String newStr = str.substring(0, idx).trim();
-//        for (int z = 0; z < newStr.length(); z += len) {
-//        lines.add(newStr.substring(z, z + len).trim());
-//        }
-//
 //        newString = str.substring(len).trim();
 //        return strTreatment(len, newString, lines);
