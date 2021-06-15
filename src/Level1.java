@@ -102,15 +102,18 @@ public class Level1 {
     // получить зашифрованную сроку из матрицы
     public static String getCodingStringFromMatrix(String[][] str) {
         String resultStr = "";
-        for (int i = 0; i < str.length; i ++ ) {
-            for (int j = 0; j < str[i].length; j ++) {
+        int idx = 0;
+        for (int i = 0; i < str[0].length; i ++ ) {
+            for (int j = 0; j < str.length; j ++) {
                 if (str[j][i] != null){
                     resultStr += str[j][i];
                 }
             }
-            if (i != str.length-1){
-                resultStr +=" ";
+            if(i != str[0].length - 1){
+                resultStr += " ";
             }
+
+            idx++;
         }
         return resultStr;
     }
