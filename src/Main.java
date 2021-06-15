@@ -1,13 +1,8 @@
 public class Main {
     public static void main(String[] args) {
-//        String str = "1) строка разбивается на набор строк через выравнивание по заданной ширине.";
-//        String substr = "строк";
-        String str = "12345";
-        String substr = "123";
-        int[] z = Level1.WordSearch(3, str, substr);
-        for(int i : z ){
-            System.out.println(i);
-        }
+        int [] arr = new int[] {1,2,3,4,5,6,55,7,8,9,10};
+        int N = arr.length;
+        System.out.println(Level1.SumOfThe(N, arr));
     }
 }
 
