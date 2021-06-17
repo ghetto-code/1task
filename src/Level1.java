@@ -23,8 +23,6 @@ public class Level1 {
         }
         result = minus(maxStr,minStr);
 
-
-
         return result;
     }
     public static int bigger(String s1, String s2) {
@@ -38,7 +36,12 @@ public class Level1 {
                 }
             }
         }
-
+        if (s1.length() > s2.length()) {
+            return 1;
+        }
+        if (s2.length() > s1.length()) {
+            return 2;
+        }
         return 0;
     }
 
@@ -76,6 +79,11 @@ public class Level1 {
                         maxChars[i] = numb;
                         resCol.add(0,stringFromElem);
                         break;
+                    } else {
+                        // создаем символ, в который запишем первый элемент массива
+                        char numb = '9';
+                        // обновим символ, из которого вычитали единицу
+                        maxChars[j] = numb;
                     }
                 }
             }
