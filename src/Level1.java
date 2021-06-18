@@ -96,7 +96,8 @@ public class Level1 {
                 resCol.remove(0);
             }
         }
-
+        resCol.set(0,"\"");
+        resCol.add("\"");
 
         for (String x : resCol){
             result += x;
