@@ -1,9 +1,9 @@
 public class Main {
     public static void main(String[] args) {
 
-        String str1 = "321";
-        String str2 = "1";
-        String str3 = Level1.BigMinus(str1, str2);
+        int N = 5;
+        int [] members = new int[] {10,20,10};
+        String str3 = Level1.MassVote(N, members);
         System.out.println(str3);
 
     }
