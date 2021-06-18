@@ -50,45 +50,48 @@ public class Level1 {
         ArrayList<String> resCol = new ArrayList<>();
         char [] maxChars = max.toCharArray();
         char [] minChars = min.toCharArray();
-        for (int i = maxChars.length - 1; i >= 0; i --) {
-            if ((int)maxChars[i] - (int)minChars[i] >= 0) {
-                resCol.add(0,String.valueOf((int)maxChars[i] - (int)minChars[i]));
-            } else {
-                for (int j = i - 1; j >= 0; j --) {
-                    if (maxChars[j] != '0') {
-                        // получаем строку из символа
-                        String stringFromElem = String.valueOf(maxChars[j]);
-                        // конвертируем в int и вычитаем - 1
-                        String stringFromSecondElem = String.valueOf(minChars[i]);
-                        int intFromSecondString = Integer.parseInt(stringFromSecondElem);
-                        int intFromString = Integer.parseInt(stringFromElem) - 1;
-                        // получаем строку из результата
-                        stringFromElem = String.valueOf(intFromString);
-                        // создаем массив символов
-                        char [] numbers = stringFromElem.toCharArray();
-                        // создаем символ, в который запишем первый элемент массива
-                        char numb = numbers[0];
-                        // обновим символ, из которого вычитали единицу
-                        maxChars[j] = numb;
+        if (max.equals(min)) {
+            resCol.add("0");
+        } else {
+            for (int i = maxChars.length - 1; i >= 0; i --) {
+                if ((int)maxChars[i] - (int)minChars[i] >= 0) {
+                    resCol.add(0,String.valueOf((int)maxChars[i] - (int)minChars[i]));
+                } else {
+                    for (int j = i - 1; j >= 0; j --) {
+                        if (maxChars[j] != '0') {
+                            // получаем строку из символа
+                            String stringFromElem = String.valueOf(maxChars[j]);
+                            // конвертируем в int и вычитаем - 1
+                            String stringFromSecondElem = String.valueOf(minChars[i]);
+                            int intFromSecondString = Integer.parseInt(stringFromSecondElem);
+                            int intFromString = Integer.parseInt(stringFromElem) - 1;
+                            // получаем строку из результата
+                            stringFromElem = String.valueOf(intFromString);
+                            // создаем массив символов
+                            char [] numbers = stringFromElem.toCharArray();
+                            // создаем символ, в который запишем первый элемент массива
+                            char numb = numbers[0];
+                            // обновим символ, из которого вычитали единицу
+                            maxChars[j] = numb;
 
-                        stringFromElem = String.valueOf(maxChars[i]);
-                        intFromString = Integer.parseInt(stringFromElem) + 10 - intFromSecondString;
-                        stringFromElem = String.valueOf(intFromString);
-                        numbers = stringFromElem.toCharArray();
-                        numb = numbers[0];
-                        maxChars[i] = numb;
-                        resCol.add(0,stringFromElem);
-                        break;
-                    } else {
-                        // создаем символ, в который запишем первый элемент массива
-                        char numb = '9';
-                        // обновим символ, из которого вычитали единицу
-                        maxChars[j] = numb;
+                            stringFromElem = String.valueOf(maxChars[i]);
+                            intFromString = Integer.parseInt(stringFromElem) + 10 - intFromSecondString;
+                            stringFromElem = String.valueOf(intFromString);
+                            numbers = stringFromElem.toCharArray();
+                            numb = numbers[0];
+                            maxChars[i] = numb;
+                            resCol.add(0,stringFromElem);
+                            break;
+                        } else {
+                            // создаем символ, в который запишем первый элемент массива
+                            char numb = '9';
+                            // обновим символ, из которого вычитали единицу
+                            maxChars[j] = numb;
+                        }
                     }
                 }
             }
         }
-
 
 
         for (int i = 0; i < resCol.size(); i ++) {
