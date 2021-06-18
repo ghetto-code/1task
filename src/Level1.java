@@ -96,8 +96,10 @@ public class Level1 {
                 resCol.remove(0);
             }
         }
-        resCol.add(0,"\"");
-        resCol.add("\"");
+//        resCol.add(0,"\"");
+//        resCol.add("\"");
+//        resCol.add(0,"'");
+//        resCol.add("'");
 
         for (String x : resCol){
             result += x;
