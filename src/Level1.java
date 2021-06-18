@@ -98,8 +98,11 @@ public class Level1 {
         }
 //        resCol.add(0,"\"");
 //        resCol.add("\"");
-        resCol.add(0,"'");
-        resCol.add("'");
+        if(resCol.size() ==1 && resCol.get(0).equals("0")){
+            resCol.add(0,"'");
+            resCol.add("'");
+        }
+
 
         for (String x : resCol){
             result += x;
