@@ -6,7 +6,7 @@ public class Level1 {
         } else {
             system = 16;
         }
-        int[] decimal = new int[N-1];
+        int[] decimal = new int[N];
         int idx = 0;
         for (int x : data) {
             String currentInt = String.valueOf(x);
@@ -16,7 +16,6 @@ public class Level1 {
             for (int i = 0; i < currentIntArrChars.length; i++) {
                 String z = String.valueOf(currentIntArrChars[i]);
                 int c = Integer.parseInt(z);
-
                 result += c * Math.pow(system, pow);
                 pow--;
             }
