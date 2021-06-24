@@ -1,12 +1,10 @@
 
 public class Main {
     public static void main(String[] args) {
-    int [] message = new int[]{1234,1777};
-    int [] x = Level1.UFO(message.length, message, false);
-    for(int z : x){
-        System.out.println(z);
-    }
-
+        int L = 10;
+        int N = 2;
+        int [][] road = new int[][]{{0,5,5},{5,2,2}};
+        System.out.println(Level1.Unmanned(L, N, road));
     }
 }
 
