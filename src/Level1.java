@@ -1,11 +1,15 @@
 public class Level1 {
     public static int Unmanned(int L, int N, int [][] track) {
 
+
         // пршедшее время на текущий момент
         int totalTime = track[0][0];
-
+        if (L < track[0][0]) {
+            totalTime = L;
+            return totalTime;
+        }
         // проходим по "участкам дороги"
-        for (int i = 0; i < track.length; i ++) {
+        for (int i = 0; i < N; i ++) {
 
             // записываем время от начала дороги до текущего и до следующего участка с учетом свободной дороги
             int timeFromStartToCurrentPart = track[i][0];
@@ -13,7 +17,7 @@ public class Level1 {
 
             // если мы не на последнем участке, тогда обновляем переменную с количеством времени от начала дороги до
             // следующей части на первое число в подмассиве "участок"
-            if (i != track.length - 1) {
+            if (i != N - 1) {
                 timeFromStartToNextPart = track[i+1][0];
             } else {
 
