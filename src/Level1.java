@@ -44,7 +44,7 @@ public class Level1 {
         for (int i = 0; i < m.length; i ++) {
 
             // проходим по каждому лементу каждой строки в массив
-            for (int j = 0; j < m[i].length; j ++) {
+            for (int j = 0; j < m[i].length-1; j ++) {
 
                 // если текущий элемент равен первому элементу из массива с вражескими координатами
                 if (m[i][j] == t[0][0]) {
@@ -67,6 +67,7 @@ public class Level1 {
                     }
                 }
             }
+
         }
         return false;
     }
