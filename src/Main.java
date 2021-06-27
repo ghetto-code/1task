@@ -1,9 +1,9 @@
 
 public class Main {
     public static void main(String[] args) {
-        String map = "900934352126360 119214144058652 979486082875698 322436531185165 887105930987956 232802644488782 302771989566798 073573207654780 311755785362806 909007939272309 395094805516080 562910805349811 993854324744973 768703404219199 630625270887198";
-        String target = "99 99";
-        System.out.println(Level1.TankRush(15,15, map, 2,2, target));
+        int N = 5;
+        int [] list = new int[] {25,75,150,250,350,450,470,550};
+        System.out.println(Level1.MaximumDiscount(N, list));
     }
 }
 
