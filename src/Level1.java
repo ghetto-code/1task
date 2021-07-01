@@ -29,9 +29,12 @@ public class Level1 {
             if (!x.equals(part)) {
                 return false;
             }
-            lineCopy = lineCopy.substring(part.length());
+            lineCopy = lineCopy.substring(part.length()-1);
         }
-        if (lineCopy.length() > 0) {
+        if (lineCopy.length() != 1) {
+            return false;
+        }
+        if (lineCopy.charAt(0) != '*') {
             return false;
         }
 
