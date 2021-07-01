@@ -1,36 +1,41 @@
-import java.util.*;
-import java.util.stream.Collectors;
-
 public class Level1 {
-    public static int MaximumDiscount(int N, int [] price) {
-        int result = 0;
-        int [] copyPrice = price;
+    public static boolean LineAnalysis(String line){
 
-
-        Integer [] priceList = new Integer[copyPrice.length];
-        for (int i = 0; i < copyPrice.length; i ++) {
-            priceList[i] = copyPrice[i];
+        String lineCopy = line;
+        String part = String.valueOf(lineCopy.charAt(0));
+        if (line.charAt(0) != '*' || line.charAt(line.length()-1) != '*') {
+            return false;
         }
-        List<Integer> list = Arrays.asList(priceList);
-        List<Integer> sortedList = list.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
-
-        for (int i = 0; i < copyPrice.length; i ++) {
-            copyPrice[i] = sortedList.get(i);
+        if (lineCopy.length() == 1 || lineCopy.length() == 2 || lineCopy.length() == 3) {
+            return true;
         }
 
 
-
-        try {
-            for (int i = 0; i < copyPrice.length; i += 3) {
-                result += copyPrice[i+2];
+        for (int i = 1; i < lineCopy.length(); i ++) {
+            part += lineCopy.charAt(i);
+            if (lineCopy.charAt(i) == '*') {
+                break;
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+        lineCopy = lineCopy.substring(part.length() - 1);
 
+        if(lineCopy.length() == 0) {
+            return true;
         }
 
 
+        while (lineCopy.length() >= part.length()) {
+            String x = lineCopy.substring(0,part.length());
+            if (!x.equals(part)) {
+                return false;
+            }
+            lineCopy = lineCopy.substring(part.length());
+        }
+        if (lineCopy.length() > 0) {
+            return false;
+        }
 
 
-        return result;
+        return true;
     }
 }
