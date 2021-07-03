@@ -1,7 +1,9 @@
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(Level1.LineAnalysis("**"));
+        int [] arr = new int[] {1, 2, 3, 4, 5};
+        int N = arr.length;
+        System.out.println(Level1.MisterRobot(N, arr));
     }
 }
 
