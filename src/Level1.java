@@ -33,7 +33,7 @@ public class Level1 {
                 }
             }
         }
-        for(int i = 0; i < preResult.length; i ++){
+
             for (int j = 0; j < preResult.length - 1; j ++) {
                 if (Integer.parseInt(preResult[j][1]) == Integer.parseInt(preResult[j+1][1])) {
                     int len;
@@ -43,11 +43,10 @@ public class Level1 {
                         len = preResult[j + 1][0].length();
                     }
                     for (int l = 0; l < len; l ++) {
-                        char d = preResult[j][0].charAt(l);
-                        char f = preResult[j + 1][0].charAt(l);
-                        System.out.println(d > f);
-                        System.out.println(preResult[j][0].charAt(l) + " " + preResult[j + 1][0].charAt(l));
-                        if (preResult[j + 1][0].charAt(l) < preResult[j][0].charAt(l)) {
+                        char currentEl = preResult[j][0].charAt(l);
+                        char nextEl = preResult[j + 1][0].charAt(l);
+
+                        if (currentEl > nextEl && l != len-1) {
                             String[] swap = preResult[j];
                             preResult[j] = preResult[j + 1];
                             preResult[j + 1] = swap;
@@ -59,7 +58,7 @@ public class Level1 {
 
                 }
             }
-        }
+
 
 
         String [] result = new String[preResult.length];
