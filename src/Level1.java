@@ -45,8 +45,7 @@ public class Level1 {
                     for (int l = 0; l < len; l ++) {
                         char d = preResult[j][0].charAt(l);
                         char f = preResult[j + 1][0].charAt(l);
-                        System.out.println(d > f);
-                        System.out.println(preResult[j][0].charAt(l) + " " + preResult[j + 1][0].charAt(l));
+                       
                         if (preResult[j + 1][0].charAt(l) < preResult[j][0].charAt(l)) {
                             String[] swap = preResult[j];
                             preResult[j] = preResult[j + 1];
