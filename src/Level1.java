@@ -33,27 +33,35 @@ public class Level1 {
                 }
             }
         }
-        for (int i = 0; i < preResult.length; i ++) {
+        for(int i = 0; i < preResult.length; i ++){
             for (int j = 0; j < preResult.length - 1; j ++) {
                 if (Integer.parseInt(preResult[j][1]) == Integer.parseInt(preResult[j+1][1])) {
-                  int len;
-                  if(preResult[j][0].length() <= preResult[j + 1][0].length()){
-                      len = preResult[j][0].length();
-                  } else {
-                      len = preResult[j + 1][0].length();
-                  }
-                  for (int l = 0; l < len; l ++) {
-                      if (preResult[j][0].charAt(l) < preResult[j + 1][0].charAt(l)) {
-                          String[] swap = preResult[j];
-                          preResult[j] = preResult[j + 1];
-                          preResult[j + 1] = swap;
-                      }
-                  }
+                    int len;
+                    if(preResult[j][0].length() <= preResult[j + 1][0].length()){
+                        len = preResult[j][0].length();
+                    } else {
+                        len = preResult[j + 1][0].length();
+                    }
+                    for (int l = 0; l < len; l ++) {
+                        char d = preResult[j][0].charAt(l);
+                        char f = preResult[j + 1][0].charAt(l);
+                        System.out.println(d > f);
+                        System.out.println(preResult[j][0].charAt(l) + " " + preResult[j + 1][0].charAt(l));
+                        if (preResult[j + 1][0].charAt(l) < preResult[j][0].charAt(l)) {
+                            String[] swap = preResult[j];
+                            preResult[j] = preResult[j + 1];
+                            preResult[j + 1] = swap;
+                            break;
+
+                        }
+                    }
 
 
                 }
             }
         }
+
+
         String [] result = new String[preResult.length];
         int id = 0;
         for (String[] x : preResult) {

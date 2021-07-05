@@ -8,6 +8,16 @@ public class Main {
                 "сумка23 2",
                 "сумка128 4",
         };
+//        String [] list = new String[] {
+//                "123 5",
+//                "32 3",
+//                "124 5",
+//                "128 1",
+//                "32 2",
+//                "23 4",
+//                "128 4",
+//                "128 1"
+//        };
         int N = list.length;
 
         String [] goodList = Level1.ShopOLAP(N, list);
