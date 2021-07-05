@@ -1,0 +1,13 @@
+<config>
+    <file
+            source_path="/home/c3po/IdeaProjects/1task/src"
+            destination_path="/home/c3po/IdeaProjects/1task"
+            file_name="boroda.txt"
+    />
+
+    <file
+            source_path="/home/c3po/IdeaProjects/1task/src"
+            destination_path="/home/c3po/IdeaProjects/1task"
+            file_name="pro.txt"
+    />
+</config>
