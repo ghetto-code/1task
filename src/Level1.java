@@ -1,32 +1,66 @@
+import java.util.*;
+
 public class Level1 {
-    public static boolean MisterRobot(int N, int [] data) {
-        if (N <= 4) {
-            return false;
+    public static String [] ShopOLAP(int N, String [] items) {
+
+        HashMap<String, String> itemsHash = new HashMap<>();
+
+        for (String item : items){
+            String[] arr = item.split(" ");
+            if (itemsHash.containsKey(arr[0])) {
+                itemsHash.put(arr[0],String.valueOf(Integer.parseInt(arr[1]) + Integer.parseInt(itemsHash.get(arr[0]))));
+            } else {
+                itemsHash.put(arr[0],arr[1]);
+            }
+
         }
-        for (int i = 0; i < data.length - 2; i ++) {
-            if (!isAscending(data[i], data[i + 1], data[i + 2])) {
-                makeRotation(i, data);
-                if (isAscending(data[i], data[i + 1], data[i + 2])) {
-                    break;
-                }
-                if (i == 2 && !isAscending(data[i], data[i + 1], data[i + 2])) {
-                    return false;
+
+
+        String[][] preResult = new String[itemsHash.size()][2];
+        int idx = 0;
+        for (Map.Entry<String,String> x : itemsHash.entrySet()) {
+            preResult[idx][0] = x.getKey();
+            preResult[idx][1] = x.getValue();
+            idx++;
+        }
+
+        for (int i = 0; i < preResult.length; i ++) {
+            for (int j = 0; j < preResult.length - 1; j ++) {
+                if (Integer.parseInt(preResult[j][1]) < Integer.parseInt(preResult[j+1][1])) {
+                    String[] swap = preResult[j];
+                    preResult[j] = preResult[j + 1];
+                    preResult[j + 1] = swap;
                 }
             }
         }
+        for (int i = 0; i < preResult.length; i ++) {
+            for (int j = 0; j < preResult.length - 1; j ++) {
+                if (Integer.parseInt(preResult[j][1]) == Integer.parseInt(preResult[j+1][1])) {
+                  int len;
+                  if(preResult[j][0].length() <= preResult[j + 1][0].length()){
+                      len = preResult[j][0].length();
+                  } else {
+                      len = preResult[j + 1][0].length();
+                  }
+                  for (int l = 0; l < len; l ++) {
+                      if (preResult[j][0].charAt(l) < preResult[j + 1][0].charAt(l)) {
+                          String[] swap = preResult[j];
+                          preResult[j] = preResult[j + 1];
+                          preResult[j + 1] = swap;
+                      }
+                  }
 
 
+                }
+            }
+        }
+        String [] result = new String[preResult.length];
+        int id = 0;
+        for (String[] x : preResult) {
+            result[id] = x[0] + " " + x[1];
+            id++;
+        }
 
-        return true;
-    }
-
-    public static boolean isAscending(int a, int b, int c) {
-        return a < b && b < c;
-    }
-    public static void makeRotation(int count, int [] arr) {
-        int swap = arr[count];
-        arr[count] = arr[count + 1];
-        arr[count + 1] = arr[count + 2];
-        arr[count + 2] = swap;
+        return result;
     }
 }
