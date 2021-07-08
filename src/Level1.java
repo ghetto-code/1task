@@ -9,7 +9,9 @@ public class Level1 {
     public static String finalString = "";
     private static HashMap<Integer,String> commands = new HashMap<>();
 
-
+    public static String BastShoe() {
+        return finalString;
+    }
     public static String BastShoe(String command) {
         commands.put(1, "add");
         commands.put(2, "del");
