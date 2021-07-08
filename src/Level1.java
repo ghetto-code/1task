@@ -1,73 +1,107 @@
-import java.util.*;
+import java.beans.ExceptionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Level1 {
-    public static String [] ShopOLAP(int N, String [] items) {
+    private static int operationsCount = 0;
+    private static ArrayList<String[]> operationsStack = new ArrayList<>();
+    private static ArrayList<String> stateStack = new ArrayList<>();
+    public static String finalString = "";
+    private static HashMap<Integer,String> commands = new HashMap<>();
 
-        HashMap<String, String> itemsHash = new HashMap<>();
 
-        for (String item : items){
-            String[] arr = item.split(" ");
-            if (itemsHash.containsKey(arr[0])) {
-                itemsHash.put(arr[0],String.valueOf(Integer.parseInt(arr[1]) + Integer.parseInt(itemsHash.get(arr[0]))));
-            } else {
-                itemsHash.put(arr[0],arr[1]);
-            }
+    public static String BastShoe(String command) {
+        commands.put(1, "add");
+        commands.put(2, "del");
+        commands.put(3, "get");
+        commands.put(4, "undo");
+        commands.put(5, "redo");
 
+        if (operationsStack.size() == 0) {
+            stateStack.add(finalString);
+            upOperationsCount();
         }
-
-
-        String[][] preResult = new String[itemsHash.size()][2];
-        int idx = 0;
-        for (Map.Entry<String,String> x : itemsHash.entrySet()) {
-            preResult[idx][0] = x.getKey();
-            preResult[idx][1] = x.getValue();
-            idx++;
-        }
-
-        for (int i = 0; i < preResult.length; i ++) {
-            for (int j = 0; j < preResult.length - 1; j ++) {
-                if (Integer.parseInt(preResult[j][1]) < Integer.parseInt(preResult[j+1][1])) {
-                    String[] swap = preResult[j];
-                    preResult[j] = preResult[j + 1];
-                    preResult[j + 1] = swap;
-                }
-            }
-        }
-
-            for (int j = 0; j < preResult.length - 1; j ++) {
-                if (Integer.parseInt(preResult[j][1]) == Integer.parseInt(preResult[j+1][1])) {
-                    int len;
-                    if(preResult[j][0].length() <= preResult[j + 1][0].length()){
-                        len = preResult[j][0].length();
-                    } else {
-                        len = preResult[j + 1][0].length();
+        String [] strArr = command.split(" ");
+        operationsStack.add(strArr);
+        try {
+            if (Integer.parseInt(strArr[0]) == 1) {
+                try{
+                    int x = Integer.parseInt(operationsStack.get(operationsStack.size()-2)[0]);
+                    if (x == 4) {
+                        operationsStack.clear();
+                        stateStack.clear();
+                        operationsCount = 0;
                     }
-                    for (int l = 0; l < len; l ++) {
-                        char currentEl = preResult[j][0].charAt(l);
-                        char nextEl = preResult[j + 1][0].charAt(l);
-
-                        if (currentEl > nextEl && l != len-1) {
-                            String[] swap = preResult[j];
-                            preResult[j] = preResult[j + 1];
-                            preResult[j + 1] = swap;
-                            break;
-
-                        }
-                    }
-
+                    add(strArr[1]);
+                }catch (IndexOutOfBoundsException e){
 
                 }
             }
-
-
-
-        String [] result = new String[preResult.length];
-        int id = 0;
-        for (String[] x : preResult) {
-            result[id] = x[0] + " " + x[1];
-            id++;
+            if (Integer.parseInt(strArr[0]) == 2) {
+                if (Integer.parseInt(operationsStack.get(operationsStack.size()-1)[0]) == 4) {
+                    operationsStack.clear();
+                    stateStack.clear();
+                    operationsCount = 0;
+                }
+                del(Integer.parseInt(strArr[1]));
+            }
+            if (Integer.parseInt(strArr[0]) == 3) {
+                return getSymbol(Integer.parseInt(strArr[1]));
+            }
+            if (Integer.parseInt(strArr[0]) == 4) {
+                undo();
+            }
+            if (Integer.parseInt(strArr[0]) == 5) {
+                redo();
+            }
+            if(!commands.containsKey(Integer.parseInt(strArr[0]))){
+                return finalString;
+            }
+        } catch (NumberFormatException e) {
         }
 
-        return result;
+        return finalString;
     }
+
+    public static void undo () {
+        if (operationsCount > 1) {
+            finalString = stateStack.get(operationsCount-2);
+            downOperationsCount();
+        }
+
+
+
+    }
+    public static void redo () {
+        finalString = stateStack.get(operationsCount);
+        upOperationsCount();
+    }
+    public static String getSymbol(int i) {
+        String x = String.valueOf(finalString.charAt(i));
+        upOperationsCount();
+        return x;
+
+    }
+    public static void add(String addStr) {
+        finalString += addStr;
+        stateStack.add(finalString);
+        upOperationsCount();
+    }
+    public static void del(int quantity) {
+        if (quantity > finalString.length()) {
+            finalString = "";
+        } else {
+            finalString = finalString.substring(0,finalString.length() - quantity);
+        }
+
+        stateStack.add(finalString);
+        upOperationsCount();
+    }
+    public static void upOperationsCount () {
+        operationsCount++;
+    }
+    public static void downOperationsCount () {
+        operationsCount--;
+    }
+
 }
