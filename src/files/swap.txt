@@ -1,0 +1,295 @@
+//package files;
+//
+//import java.beans.ExceptionListener;
+//import java.util.ArrayList;
+//import java.util.HashMap;
+//
+//public class swap {
+//    private static int operationsCount = 0;
+//    private static ArrayList<String[]> operationsStack = new ArrayList<>();
+//    private static ArrayList<String> stateStack = new ArrayList<>();
+//    public static String finalString = "";
+//    private static HashMap<Integer,String> commands = new HashMap<>();
+//
+//
+//
+//    public static String BastShoe(String command) {
+//        commands.put(1, "add");
+//        commands.put(2, "del");
+//        commands.put(3, "get");
+//        commands.put(4, "undo");
+//        commands.put(5, "redo");
+//
+//        if (operationsStack.size() == 0) {
+//            stateStack.add(finalString);
+//            upOperationsCount();
+//        }
+//        String [] strArr = new String[2];
+//
+//        strArr[0] = command.substring(0,1);
+//        if (command.length() > 1){
+//            strArr[1] = command.substring(2);
+//        }
+//
+//        operationsStack.add(strArr);
+//        try {
+//
+//            if (Integer.parseInt(strArr[0]) == 1) {
+//
+//                try{
+//                    int x = Integer.parseInt(operationsStack.get(operationsStack.size()-2)[0]);
+//                    if (x == 4) {
+//                        operationsStack.clear();
+//                        stateStack.clear();
+//                        operationsCount = 0;
+//                    }
+//                    add(strArr[1]);
+//                    operationsStack.add(strArr);
+//
+//                }catch (IndexOutOfBoundsException e){
+//                    add(strArr[1]);
+//                }
+//            }
+//            if (Integer.parseInt(strArr[0]) == 2) {
+//                int x = Integer.parseInt(operationsStack.get(operationsStack.size()-2)[0]);
+//                if (x == 4) {
+//                    operationsStack.clear();
+//                    stateStack.clear();
+//                    operationsCount = 0;
+//                }
+//                del(Integer.parseInt(strArr[1]));
+//                operationsStack.add(strArr);
+//            }
+//            if (Integer.parseInt(strArr[0]) == 3) {
+//                return getSymbol(Integer.parseInt(strArr[1]));
+//            }
+//            if (Integer.parseInt(strArr[0]) == 4) {
+//                undo();
+//            }
+//            if (Integer.parseInt(strArr[0]) == 5) {
+//                redo();
+//            }
+//            if(!commands.containsKey(Integer.parseInt(strArr[0]))){
+//                return finalString;
+//            }
+//        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+//        }
+//
+//        return finalString;
+//    }
+//
+//    public static void undo () {
+//        if (operationsCount > 1) {
+//            finalString = stateStack.get(operationsCount-2);
+//            downOperationsCount();
+//        }
+//
+//
+//
+//    }
+//    public static void redo () {
+//        finalString = stateStack.get(operationsCount);
+//        upOperationsCount();
+//    }
+//    public static String getSymbol(int i) {
+//        String x = String.valueOf(finalString.charAt(i));
+//        upOperationsCount();
+//        return x;
+//
+//    }
+//    public static void add(String addStr) {
+//        finalString += addStr;
+//        stateStack.add(finalString);
+//        upOperationsCount();
+//    }
+//    public static void del(int quantity) {
+//        if (quantity > finalString.length()) {
+//            finalString = "";
+//        } else {
+//            finalString = finalString.substring(0,finalString.length() - quantity);
+//        }
+//
+//        stateStack.add(finalString);
+//        upOperationsCount();
+//    }
+//    public static void upOperationsCount () {
+//        operationsCount++;
+//    }
+//    public static void downOperationsCount () {
+//        operationsCount--;
+//    }
+//
+//}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//import java.beans.ExceptionListener;
+//        import java.util.ArrayList;
+//        import java.util.HashMap;
+//
+//public class Level1 {
+//
+//    // создаем счетчик операций
+//    public static int operationsCount = 0;
+//
+//    // задаем текущую строку
+//    public static String currentString = "";
+//
+//    // задаем результирующую строку
+//    public static String finalString = "";
+//
+//    // создаем список, куда будем записывать историю оперций
+//    public static ArrayList<String []> operationsStack = new ArrayList<>();
+//
+//    // создаем список, куда будем записывать историю состояний
+//    public static ArrayList<String> stateStack = new ArrayList<>();
+//
+//    // хэш мэп со списком поддерживаемых команд
+//    public static HashMap<Integer, String> commands = new HashMap<>();
+//
+//    // массив из строк, в котором будем хранить предыдущую операцию
+//    public static String[] prevOperation = new String[2];
+//
+//    // определяем текущую команду
+//    public static String[] currentOperation = new String[2];
+//
+//
+//
+//
+//    public static String BastShoe(String command) {
+//
+//        // определяем список команд редактора
+//        defCommands(commands);
+//
+//        // если стэк операций пуст, вернуть текущую строку
+//        if (operationsStack.size() == 0) {
+//            stateStack.add(currentString);
+//            upOperationsCount();
+//            operationsStack.add(new String[]{"1", ""});
+//        }
+//
+//        // вызываем функцию определения текущей команды
+//        defCurrentOperation(currentOperation, command);
+//        if (Integer.parseInt(currentOperation[0]) == 1) {
+//            try {
+//                if (Integer.parseInt(prevOperation[0]) == 4) {
+//                    operationsStack.clear();
+//                    stateStack.clear();
+//                    operationsCount = 0;
+//                }
+//                add(currentOperation[1]);
+//                prevOperation = currentOperation;
+//
+//            } catch (Exception e) {
+//                add(currentOperation[1]);
+//
+//            }
+//        }
+//        if (Integer.parseInt(currentOperation[0]) == 2) {
+//            if (Integer.parseInt(prevOperation[0]) == 4) {
+//                operationsStack.clear();
+//                stateStack.clear();
+//                operationsCount = 0;
+//            }
+//            del(Integer.parseInt(currentOperation[1]));
+//            prevOperation = currentOperation;
+//
+//        }
+//
+//
+//        return finalString;
+//    }
+//
+//    // функция добавления строки
+//    public static void add(String addStr) {
+//
+//        // результируюящая строка равна результату конкатенации текущей строки и добавочной
+//        finalString = currentString + addStr;
+//
+//        // далее фиксируем финальную строку в стэке состояний
+//        stateStack.add(finalString);
+//
+//        // обновляем счетчик операций
+//        upOperationsCount();
+//
+//        // обновляем значение текущей строки
+//        currentString = finalString;
+//        operationsStack.add(currentOperation);
+//
+//    }
+//
+//    // функция удаления заданного количества символов
+//    public static void del(int quantity) {
+//
+//        // если количество удаляемых символов больше, чем длина текущей строки,...
+//        if (quantity > currentString.length()) {
+//
+//            //  тогда очистить результирующую строку и текущую
+//            finalString = "";
+//            currentString = "";
+//
+//            // если нет, то...
+//        } else {
+//
+//            // обновляем значение финальной строки, а затем текущей
+//            finalString = currentString.substring(0,currentString.length() - quantity);
+//            currentString = finalString;
+//        }
+//
+//        // добавляем результирующую строку в список состояний
+//        stateStack.add(finalString);
+//
+//        // обновляем значение счетчика операций
+//        upOperationsCount();
+//
+//        // добавляем текущую опрецию в стек
+//        operationsStack.add(currentOperation);
+//
+//        // обновляем значение предыдущей операции
+////        prevOperation = currentOperation;
+//    }
+//
+//    public static void undo () {
+//
+//
+//    }
+//    public static void redo () {
+//
+//    }
+//    public static String getSymbol(int i) {
+//        String x = String.valueOf(finalString.charAt(i));
+//        upOperationsCount();
+//        return x;
+//
+//    }
+//
+//    public static void upOperationsCount () {
+//        operationsCount++;
+//    }
+//    public static void downOperationsCount () {
+//        operationsCount--;
+//    }
+//    public static void defCommands(HashMap<Integer, String> commands) {
+//        commands.put(1, "add");
+//        commands.put(2, "del");
+//        commands.put(3, "get");
+//        commands.put(4, "undo");
+//        commands.put(5, "redo");
+//    }
+//
+//    // функция определения текущей операции
+//    public static void defCurrentOperation(String[] currentOperation, String currentCommand) {
+//
+//        // в первую ячку записываем первый символ строки
+//        currentOperation[0] = currentCommand.substring(0,1);
+//
+//        // если длина текущей команды больше 1, тогда....
+//        if (currentCommand.length() > 1){
+//
+//            // во вторую ячейку записываем оставшуюся часть строки, начиная с третьего символа, чтобы не попадать на
+//            // первый пробел
+//            currentOperation[1] = currentCommand.substring(2);
+//        }
+//
+//    }
+//
+//}
