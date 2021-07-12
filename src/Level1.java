@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Level1 {
 
     public static ArrayList<String> combinationsList = new ArrayList<>();
-    public  static String BiggerGreater(String input){
+    public static String BiggerGreater(String input){
         String resultString = "";
         int N = input.length();
         if (N < 2) {
