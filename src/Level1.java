@@ -28,7 +28,6 @@ public class Level1 {
             id++;
         }
         Arrays.sort(qts);
-        int difference = 0;
         HashMap<Integer, Integer> ints = new HashMap<>();
         for (Map.Entry<String,Integer> x : quantity.entrySet()) {
             if (!ints.containsKey(x.getValue())) {
@@ -61,7 +60,7 @@ public class Level1 {
                  if (firstNumber == 1 || secondNumber == 1){
                      return true;
                  }
-                 if (firstNumber - secondNumber == 1 || firstNumber < secondNumber) {
+                 if (firstNumber - secondNumber == 1 || secondNumber - firstNumber == 1) {
                     return true;
                  }
 
