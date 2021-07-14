@@ -24,7 +24,6 @@ public class Level1 {
         int id = 0;
 
         for (Map.Entry<String,Integer> x : quantity.entrySet()) {
-            System.out.println(x.getKey() + " " + x.getValue());
             qts[id] = x.getValue();
             id++;
         }
