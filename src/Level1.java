@@ -6,23 +6,50 @@ public class Level1 {
                 mtx[i][j] = Matrix[i].charAt(j);
             }
         }
+        int xLen = mtx[0].length;
+        int yLen = mtx.length;
 
-        for (int time = 0; time < T; time ++) {
-            for (int i = 0; i < mtx.length; i++) {
-                char swap = mtx[i][0];
-                for (int j = 0; j < mtx[i].length - 1; j++) {
-                    mtx[i][j] = mtx[i][j + 1];
+        // узнаем количество шагов до центра
+        int stepToCenter = Math.min(xLen, yLen) / 2;
+
+        for (int times = 0; times < T; times ++) {
+            for (int j = 0; j < stepToCenter; j ++) {
+                char rightTopCorner = mtx[j][xLen - j - 1];
+                char rightBottomCorner = mtx[yLen - j - 1][xLen - j - 1];
+                char leftBottomCorner = mtx[yLen - j - 1][j];
+
+                //top
+                for (int x = xLen - j - 1; x > j; x--) {
+                    mtx[j][x] = mtx[j][x - 1];
                 }
-                mtx[i][mtx[i].length - 1] = swap;
+
+                //right
+                for (int y = yLen - j - 1; y > j ; y--) {
+                    mtx[y][xLen - j - 1] = mtx[y - 1][xLen - j - 1];
+                    if (y - 1 == j) {
+                        mtx[j + 1][xLen - j - 1] = rightTopCorner;
+                    }
+                }
+
+                //bottom
+                for (int x = j; x < xLen - j - 1; x ++) {
+                    mtx[yLen - j - 1][x] = mtx[yLen - j - 1][x + 1];
+                    if (x + 1 == xLen - j - 1) {
+                        mtx[yLen - j - 1][xLen - j - 2] = rightBottomCorner;
+                    }
+                }
+
+                //left
+                for (int y = j; y < yLen - j - 1; y ++) {
+                    mtx[y][j] = mtx[y + 1][j];
+                    if (y + 1 == yLen - j - 1) {
+                        mtx[yLen - j - 2][j] = leftBottomCorner;
+                    }
+                }
             }
         }
-
         for (int i = 0; i < mtx.length; i ++) {
-            String x = "";
-            for (int j = 0; j < mtx[i].length; j ++) {
-                x += String.valueOf(mtx[i][j]);
-            }
-            Matrix[i] = x;
+            Matrix[i] = String.valueOf(mtx[i]);
         }
     }
 }
