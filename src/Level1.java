@@ -1,4 +1,6 @@
-import java.util.ArrayList;import java.util.List;public class Level1 {
+import java.util.*;
+
+public class Level1 {
     public static boolean TransformTransform(int[] A, int N) {
         int x [] = someFunc(someFunc(A));
         int sum = 0;
