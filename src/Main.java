@@ -1,14 +1,8 @@
 
 public class Main {
     public static void main(String[] args) {
-        String [] matrix = new String[] {"123456", "234567", "345678", "456789"};
-        int M = matrix.length;
-        int N = matrix[0].length();
-        int T = 3;
-        Level1.MatrixTurn(matrix, M, N, T);
-        for (String x : matrix) {
-            System.out.println(x);
-        }
+        int [] arr = new int[] {5, 2, 9, 8, 3, 15, 7, 6, 32, 22, 72, 1 , 3, 6, 3,1, 4,5,7,4};
+        System.out.println(Level1.TransformTransform(arr,arr.length));
     }
 }
 
