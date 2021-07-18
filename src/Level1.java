@@ -14,23 +14,25 @@ public class Level1 {
     }
     public static int[] someFunc(int [] A) {
         List<Integer> B = new ArrayList<>();
-        for (int  i = 0; i < A.length - 1; i ++) {
-            ArrayList<Integer> arrKeys = new ArrayList<>();
-            for (int  j = 0; j < A.length - 1 - i; j ++) {
-                int  k = i + j;
-                arrKeys.add(k);
-            }
-            int max = 0;
-            for (int x : arrKeys) {
-                if (A[x] >= max) {
-                    max = A[x];
+
+
+        for (int  i = 0; i < A.length; i ++) {
+            for (int  j = 0; j < A.length - i; j ++) {
+                int k = i + j;
+                int max = A[j];
+                for (int x = j; x < k + 1; x ++){
+                    if (A[x] >= max) {
+                        max = A[x];
+                    }
                 }
+                B.add(max);
+
             }
-            B.add(max);
         }
+
         int idx = 0;
         int [] arrB = new int[B.size()];
-        for(int x : B){
+        for (int x : B) {
             arrB[idx] = x;
             idx++;
         }
@@ -39,3 +41,4 @@ public class Level1 {
     }
 
 }
+
