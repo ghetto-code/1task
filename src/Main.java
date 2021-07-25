@@ -21,6 +21,13 @@ public class Main {
         System.out.println(Level1.Keymaker(18));
         System.out.println(Level1.Keymaker(19));
         System.out.println(Level1.Keymaker(20));
+        System.out.println(Level1.Keymaker(21));
+        System.out.println(Level1.Keymaker(22));
+        System.out.println(Level1.Keymaker(23));
+        System.out.println(Level1.Keymaker(24));
+        System.out.println(Level1.Keymaker(25));
+
+        System.out.println(Level1.Keymaker(50));
     }
 }
 
