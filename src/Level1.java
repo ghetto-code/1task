@@ -3,6 +3,10 @@ import java.util.*;
 public class Level1 {
     public static boolean Football(int[] F, int N) {
 
+
+        if(isSort(F)) {
+            return false;
+        }
         // создаем два клона входящего массива чисел
         int[] FootballArr = F.clone();
         int[] FootballArrClone = FootballArr.clone();
